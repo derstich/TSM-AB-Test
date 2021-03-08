@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: destrule
+spec:
+  host: shopping
+  subsets:
+  - name: green
+    labels:
+      version: front-green
+  - name: orange
+    labels:
+      version: front-orange
+  - name: grey
+    labels:
+      version: front-grey
