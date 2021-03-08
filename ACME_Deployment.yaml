@@ -1,0 +1,143 @@
+apiVersion: apps/v1 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: shopping-green
+  labels:
+    app: shopping
+    service: shopping
+spec:
+  selector:
+    matchLabels:
+      app: shopping
+      service: shopping
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: shopping
+        service: shopping
+        version: front-green
+    spec:
+      containers:
+      - image: derstich/front:green
+        name: shopping
+        env:
+        - name: FRONTEND_PORT
+          value: '3000'
+        - name: USERS_HOST
+          value: 'users'
+        - name: CATALOG_HOST
+          value: 'catalog.demo.derstich.de'
+        - name: ORDER_HOST
+          value: 'order'
+        - name: CART_HOST
+          value: 'cart'
+        - name: USERS_PORT
+          value: '8081'
+        - name: CATALOG_PORT
+          value: '8082'
+        - name: CART_PORT
+          value: '5000'
+        - name: ORDER_PORT
+          value: '6000'
+        ports:
+        - containerPort: 3000
+          name: http-shopping
+---
+apiVersion: apps/v1 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: shopping-orange
+  labels:
+    app: shopping
+    service: shopping
+spec:
+  selector:
+    matchLabels:
+      app: shopping
+      service: shopping
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: shopping
+        service: shopping
+        version: front-orange
+    spec:
+      containers:
+      - image: derstich/front:orange
+        name: shopping
+        env:
+        - name: FRONTEND_PORT
+          value: '3000'
+        - name: USERS_HOST
+          value: 'users'
+        - name: CATALOG_HOST
+          value: 'catalog.demo.derstich.de'
+        - name: ORDER_HOST
+          value: 'order'
+        - name: CART_HOST
+          value: 'cart'
+        - name: USERS_PORT
+          value: '8081'
+        - name: CATALOG_PORT
+          value: '8082'
+        - name: CART_PORT
+          value: '5000'
+        - name: ORDER_PORT
+          value: '6000'
+        ports:
+        - containerPort: 3000
+          name: http-shopping
+---
+apiVersion: apps/v1 # for versions before 1.8.0 use apps/v1beta1
+kind: Deployment
+metadata:
+  name: shopping-grey
+  labels:
+    app: shopping
+    service: shopping
+spec:
+  selector:
+    matchLabels:
+      app: shopping
+      service: shopping
+  strategy:
+    type: Recreate
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: shopping
+        service: shopping
+        version: front-grey
+    spec:
+      containers:
+      - image: derstich/front:grey
+        name: shopping
+        env:
+        - name: FRONTEND_PORT
+          value: '3000'
+        - name: USERS_HOST
+          value: 'users'
+        - name: CATALOG_HOST
+          value: 'catalog.demo.derstich.de'
+        - name: ORDER_HOST
+          value: 'order'
+        - name: CART_HOST
+          value: 'cart'
+        - name: USERS_PORT
+          value: '8081'
+        - name: CATALOG_PORT
+          value: '8082'
+        - name: CART_PORT
+          value: '5000'
+        - name: ORDER_PORT
+          value: '6000'
+        ports:
+        - containerPort: 3000
+          name: http-shopping
